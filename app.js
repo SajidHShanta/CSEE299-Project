@@ -49,6 +49,29 @@ app.post("/register", function(req, res){
   });
 });
 
+app.post("/login", function(req, res){
+  const email = req.body.email;
+  const password = req.body.password;
+  User.findOne(
+    {email: email},
+    function(err, foundUser){
+      if(err){
+        console.log(err);
+      } else{
+        if(foundUser){
+          if(foundUser.password === password){
+            res.render("home");
+          } else{
+            res.render("landing-page");
+          }
+        } else{
+          res.render("landing-page");
+        }
+      }
+    }
+  );
+});
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
