@@ -1,20 +1,28 @@
 const express = require("express");
 const ejs = require("ejs");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const app = express();
 
 //set view engine
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 //set static folder
 app.use(express.static("public"));
 
 //databasae connection
-//to-do
+mongoose.connect("mongodb+srv://admin-hm:test123@cluster0.zintc.mongodb.net/hakunamatataDB", {useNewUrlParser: true, useUnifiedTopology: true});
 
-app.get('/', (req,  res) => {
-  res.send('Hello World!')
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
+
+const User = mongoose.model('User', userSchema);
+
+app.get("/", (req,  res) => {
+  res.render("landing-page")
 });
 
 app.listen(3000, function() {
