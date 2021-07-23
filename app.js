@@ -54,9 +54,18 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const postSchema = new mongoose.Schema({
+  userID: String,
+  postContent: String,
+  isAnonymus: String,
+});
+
+//create post mongoose model
+const Post = mongoose.model('Post', postSchema);
+
 app.get("/", (req,  res) => {
   if(req.isAuthenticated()){
-    res.render("home");
+    res.render("home", {user: req.user});
   } else{
     res.render("landing-page");
   }
@@ -98,9 +107,24 @@ app.post("/register", (req, res) => {
   // });
 });
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
-    res.redirect('/');
+app.post("/login", passport.authenticate("local", { failureRedirect: "/" }), (req, res) => {
+  res.redirect("/");
+});
+
+app.post("/post", (req, res) => {
+  const newPost = new Post({
+    userID: req.body.userID,
+    postContent: req.body.postContent,
+    isAnonymus: req.body.isAnonymus
   });
+  newPost.save(function(err){
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect("/");
+    }
+  });
+});
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
