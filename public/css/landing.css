@@ -1,0 +1,119 @@
+body {
+  margin-top: 50px;
+  font-family: Montserrat;
+  text-align: center;
+  background-color: #F9F7F7;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: #393E46;
+}
+
+p {
+  color: #8f8f8f;
+}
+
+/* Heading */
+.section-heading {
+  font-size: 2.8rem;
+  line-height: 1.5;
+}
+
+/* Containers */
+.container-fluid {
+  padding: 7% 15%;
+}
+
+/* Title section*/
+#title .container-fluid {
+  padding: 3% 10% 7%;
+  text-align: left;
+}
+
+/* title image */
+.title-image {
+  width: 10%;
+}
+
+/* Footer */
+#footer {
+  background: #F4F7F7;
+}
+
+.icon2 {
+  color: black;
+}
+
+.fas:hover {
+  color: #AACFD0;
+}
+
+.feature-col {
+}
+
+.f-text {
+  color: #34495E;
+}
+
+/*sign in*/
+.video {
+  padding-right: 5%;
+  margin-left: 5%;
+  margin-top: 7%;
+  width: 110%;
+  height: 100%;
+}
+
+
+.form-control {
+  width: 80%;
+}
+
+.btn {
+  margin: 2% 2% 2% 0%;
+}
+
+.bt-log-google {
+  width: 80%;
+  /* margin: 2% 6% 6% 0%; */
+}
+
+.login-btn {
+  width: 80%;
+  margin: 2% 0% 6% 0%;
+  margin-top: 0px;
+}
+
+.bt-create-new-account {
+  width: 80%;
+  margin: 2% 0% 6% 0%;
+  margin-top: 0px;
+}
+
+.form-login {
+  align-items: center;
+}
+.fo-co{
+
+  padding: 1% 5%;
+}
+
+.reg-image {
+  width: 20%;
+}
+.form-register {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  margin: 0 auto;
+}
+.checkbox {
+  font-weight: 500;
+}
+
+.reg-form-control {
+  width: 80%;
+  length: 30px;
+}

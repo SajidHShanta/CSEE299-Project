@@ -1,28 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
 
 <head>
   <meta charset="utf-8">
   <title>Hakuna Matata</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;900&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/landing.css">
+  <script src="https://kit.fontawesome.com/9edd8b5e53.js" crossorigin="anonymous"></script>
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-  <form action="/login" method="POST">
-    <div class="form-group">
-      <label for="username">Email</label>
-      <input type="email" class="form-control" name="username">
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password">
-    </div>
-    <button type="submit" class="btn">Login</button>
-  </form>
+  <section class="colored-section" id="title">
 
-  <p>or</p>
-  <form method="get" action="/register">
-    <button type="submit" class="btn">Register</button>
-  </form>
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-lg-6 form-login">
+          <form>
+              <img class="title-image" src="images/talk.png" alt="image">
+
+            <h1 class="section-heading">Hakuna Matata</h1>
+
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput" placeholder="Email address">
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            </div>
+
+            <div class="checkbox mb-3">
+            </div>
+            <button type="button" class="btn btn-primary login-btn">Log in</button>
+
+            <button type="button" class="btn btn-dark button bt-log-google"> Login with Google</button>
+
+            <button type="button" class="btn btn-outline-dark bt-create-new-account">Create new account</button>
+
+          </form>
+        </div>
+        <div class="col-lg-6 a" style="">
+        <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/3jQIIXuhsC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+    <p>A dedicated platform for talk about mental health.</p>
+  </section>
+
+
+  </footer>
+
+
 </body>
 
 </html>
