@@ -18,21 +18,21 @@
 
 
   <body class="text-center">
-    <form class="form-register">
+    <form class="form-register" action="/register" method="POST">
       <img class="reg-image" src="images/talk.png" alt="image">
       <h2>Register profile</h2>
       <div class="">
-        <input type="yourName" id="inputName" class="reg-form-control" placeholder="Your name" required autofocus>
+        <input type="yourName" id="inputName" class="reg-form-control" placeholder="Your name" name="name" required autofocus>
       </div>
       <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
       <div class="">
-        <input type="email" id="inputEmail" class="reg-form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" class="reg-form-control" placeholder="Email address" name="username" required>
       </div>
-      <input type="password" id="inputPassword" class="reg-form-control" placeholder="Password" required>
+      <input type="password" id="inputPassword" class="reg-form-control" placeholder="Password" name="password" required>
       <div class="checkbox mb-3">
       </div>
-      <button type="button" class="btn btn-primary login-btn">Register</button>
-      <button type="button" class="btn btn-dark button bt-log-google"> Register with Google</button>
+      <button type="submit" class="btn btn-primary login-btn">Register</button>
+      <button type="button" class="btn btn-dark button bt-log-google">Register with Google</button>
     </form>
   </body>
 
