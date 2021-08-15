@@ -11,6 +11,8 @@ const findOrCreate = require("mongoose-findorcreate");
 
 const app = express();
 
+app.use(express.json());
+
 //set view engine
 app.set("view engine", "ejs");
 
@@ -43,6 +45,12 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   googleId: String,
+  posts: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Post"
+    }
+  ],
 });
 
 //for hash and salt password and save user in mongodb database
@@ -82,10 +90,16 @@ passport.use(new GoogleStrategy({
 ));
 
 const postSchema = new mongoose.Schema({
-  userID: String,
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  },
   postContent: String,
-  isAnonymus: String,
-});
+  isAnonymus: {
+    type: String,
+    default: "off",
+  },
+}, {timestamps: true});
 
 //create post mongoose model
 const Post = mongoose.model('Post', postSchema);
@@ -136,19 +150,28 @@ app.post("/login", passport.authenticate("local", { failureRedirect: "/" }), (re
   res.redirect("/");
 });
 
-app.post("/post", (req, res) => {
+app.post("/post", async (req, res) => {
   const newPost = new Post({
-    userID: req.body.userID,
+    user: req.body.userID,
     postContent: req.body.postContent,
     isAnonymus: req.body.isAnonymus
   });
-  newPost.save(function(err){
-    if(err){
-      console.log(err);
-    } else{
-      res.redirect("/");
-    }
-  });
+  try {
+    //save posts to Post model
+    const post = await newPost.save();
+    //console.log(post);
+    //save posts to User model
+    await User.updateOne({
+      _id: req.body.userID
+    }, {
+      $push: {
+        posts: post._id
+      }
+    });
+    res.redirect("/");
+  } catch(err) {
+    console.log(err);
+  }
 });
 
 app.listen(process.env.PORT, () => {
