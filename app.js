@@ -106,7 +106,20 @@ const Post = mongoose.model('Post', postSchema);
 
 app.get("/", (req,  res) => {
   if(req.isAuthenticated()){
-    res.render("home", {user: req.user});
+    Post.find({})
+      .populate("user", "name")
+      .select({
+        _id: 0,
+      })
+      .limit(20)
+      .exec((err, data) => {
+        if(err){
+          console.log(err);
+        } else {
+          //console.log(data);
+          res.render("home", {user: req.user, posts: data});
+        }
+      })
   } else{
     res.render("landing-page");
   }

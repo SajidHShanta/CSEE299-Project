@@ -70,10 +70,10 @@
         <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">UserName</a> -->
         <a class="wh-a nav-link active" aria-current="page" href="#"><%= user.name %></a>
         <a class="wh-a" href="/logout" role="button"><i class="fas fa-sign-out-alt"></i></a>
-
       </div>
     </div>
   </nav>
+
   <div class="container">
     <div class="p-4 p-md-5 mb-4 text-white rounded first-container">
       <div class="">
@@ -94,18 +94,18 @@
       </div>
     </div>
     <hr>
-    <div class="row mb-2 second-container">
+
+<div class="row mb-2 second-container">
+    <% posts.reverse().forEach(function(post){ %>
       <div class="col-md-12">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm post-container">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm post-container" style="margin-bottom: 5px">
 
           <!-- <div class="col p-4 d-flex flex-column position-static"> -->
           <div class="post-content-container">
             <div class="mb-1 text-muted">
-              <h3>user.name</h3>July 14
+              <h3><%= post.user.name %></h3><%= post.createdAt %>
             </div>
-            <p class="text-break mb-auto postText">This is a wider card with supporting text below as a natural lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to
-              additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural
-              lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional content.</p>
+            <p class="text-break mb-auto postText"><%= post.postContent %></p>
             <button type="button" title="Love it" class="hbtn btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Helpful </button>
           </div>
           <!-- <div class="col-auto d-none d-lg-block"> -->
@@ -129,15 +129,12 @@
           </div>
         </div>
       </div>
-
-    </div>
+    <% }); %>
 
   </div>
-
-
+</div>
 
   <!-- Footer -->
-
   <footer class=" white-section" id="footer">
     <div class="fo-co">
       <i class="icon2 fab fa-twitter"></i>
