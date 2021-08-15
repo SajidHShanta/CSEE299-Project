@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require("mongoose-findorcreate");
 
 const app = express();
 
@@ -40,10 +42,14 @@ const userSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
+  googleId: String,
 });
 
 //for hash and salt password and save user in mongodb database
 userSchema.plugin(passportLocalMongoose);
+
+//for google login/sign up
+userSchema.plugin(findOrCreate);
 
 //create user mongoose model
 const User = mongoose.model('User', userSchema);
@@ -52,8 +58,28 @@ const User = mongoose.model('User', userSchema);
 passport.use(User.createStrategy());
 
 // use serialize and deserialize of User model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+//google strategy
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    //console.log(profile);
+    User.findOrCreate({ googleId: profile.id }, {username: profile.emails[0].value, name: profile.displayName}, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 const postSchema = new mongoose.Schema({
   userID: String,
@@ -70,6 +96,17 @@ app.get("/", (req,  res) => {
   } else{
     res.render("landing-page");
   }
+});
+
+app.get("/auth/google",
+  passport.authenticate("google", { scope: ['profile',"email"] })
+);
+
+app.get("/auth/google/hakunamatata",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  function(req, res) {
+    // Successful authentication, redirect to home page.
+    res.redirect('/');
 });
 
 app.get("/register", (req, res) => {
