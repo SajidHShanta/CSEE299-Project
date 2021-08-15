@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -31,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //databasae connection
-mongoose.connect("mongodb+srv://admin-hm:test123@cluster0.zintc.mongodb.net/hakunamatataDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGOOSE_STRING, {useNewUrlParser: true, useUnifiedTopology: true});
 //set useCreateIndex to avoid DeprecationWarning
 mongoose.set("useCreateIndex", true);
 
@@ -92,19 +93,6 @@ app.post("/register", (req, res) => {
       });
     }
   });
-  // //Basic Register
-  // const newUser = new User({
-  //   name: req.body.name,
-  //   email: req.body.username,
-  //   password: req.body.password
-  // });
-  // newUser.save(function(err){
-  //   if(err){
-  //     console.log(err);
-  //   } else{
-  //     res.render("home");
-  //   }
-  // });
 });
 
 app.post("/login", passport.authenticate("local", { failureRedirect: "/" }), (req, res) => {
@@ -126,6 +114,6 @@ app.post("/post", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server started on port 3000");
 });
