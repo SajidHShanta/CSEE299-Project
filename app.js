@@ -111,6 +111,7 @@ app.get("/", (req,  res) => {
       .select({
         _id: 0,
       })
+      .sort({createdAt:-1})
       .limit(20)
       .exec((err, data) => {
         if(err){

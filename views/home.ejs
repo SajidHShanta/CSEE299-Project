@@ -83,14 +83,19 @@
     <hr>
 
 <div class="row mb-2 second-container">
-    <% posts.reverse().forEach(function(post){ %>
+    <% posts.forEach(function(post){ %>
       <div class="col-md-12">
         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm post-container" style="margin-bottom: 5px">
 
           <!-- <div class="col p-4 d-flex flex-column position-static"> -->
           <div class="post-content-container">
             <div class="mb-1 text-muted">
-              <h3><%= post.user.name %></h3><%= post.createdAt %>
+              <% if(post.isAnonymus === "on"){ %>
+                <h3>Anonymus User</h3><%= post.createdAt %>
+              <% } else{ %>
+                <h3><%= post.user.name %></h3><%= post.createdAt %>
+              <% } %>
+
             </div>
             <p class="text-break mb-auto postText"><%= post.postContent %></p>
             <button type="button" title="Love it" class="hbtn btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Helpful </button>
