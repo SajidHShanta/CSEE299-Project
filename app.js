@@ -181,7 +181,8 @@ app.get("/posts/:id", (req, res) => {
         user: req.user,
         post: foundPost
       });
-  });
+  })
+  .populate("user", "name")
   } else{
     res.redirect("/");
   }
