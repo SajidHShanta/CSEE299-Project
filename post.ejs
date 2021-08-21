@@ -92,7 +92,7 @@
 
             </div>
             <p class="text-break mb-auto postText"><%= post.postContent %></p>
-            <form action="/helpfull" method="POST" style="margin-top: 20px">
+            <form action="/helpfull" method="POST">
               <input type="hidden" name="userID" value="<%= user._id %>">
               <input type="hidden" name="postID" value="<%= post._id %>">
               <button type="submit" class="btn btn-danger btn-sm"><span>&#x2764;</span><strong><%= post.helpfull.length %></strong>  People thik this post is Helpful </button>

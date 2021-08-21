@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Hakuna Matata</title>
-
+  <base href="/">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;900&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
 
@@ -55,29 +55,9 @@
   </nav>
 
   <div class="container">
-    <div class="p-4 p-md-5 mb-4 text-white rounded first-container">
-      <div class="">
-        <h3>Hello <%= user.name %></h3>
-        <h1 class="big-heading">Welcome to Hakuna Matata's Home Page</h1>
-        <form action="/post" method="POST">
-          <div class="form-group">
-            <textarea class="postTextField" name="postContent" rows="5" cols="80" placeholder="What's on your mind.."></textarea>
+    <br>
 
-            <div class="post-confirm con-btn">
-              <input type="checkbox" name="isAnonymus">
-              <label for="isAnonymus">Anonymus</label>
-              <input type="hidden" name="userID" value="<%= user.id %>">
-              <input type="hidden" name="currentPath" value="/">
-              <button type="submit" class="btn btn-outline-primary btn-sm">Post</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <hr>
-
-<div class="row mb-2 second-container">
-    <% posts.forEach(function(post){ %>
+    <div class="row mb-2 second-container">
       <div class="col-md-12">
         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm post-container" style="margin-bottom: 5px">
 
@@ -85,9 +65,9 @@
           <div class="post-content-container">
             <div class="mb-1 text-muted">
               <% if(post.isAnonymus === "on"){ %>
-                <h3>Anonymus User</h3><%= post.createdAt %>
+              <h3>Anonymus User</h3><%= post.createdAt %>
               <% } else{ %>
-                <h3><%= post.user.name %></h3><%= post.createdAt %>
+              <h3><%= post.user.name %></h3><%= post.createdAt %>
               <% } %>
 
             </div>
@@ -95,7 +75,7 @@
             <form action="/helpfull" method="POST" style="margin-top: 20px">
               <input type="hidden" name="userID" value="<%= user._id %>">
               <input type="hidden" name="postID" value="<%= post._id %>">
-              <button type="submit" class="btn btn-danger btn-sm"><span>&#x2764;</span><strong><%= post.helpfull.length %></strong>  People thik this post is Helpful </button>
+              <button type="submit" class="btn btn-danger btn-sm"><span>&#x2764;</span><strong><%= post.helpfull.length %></strong> People thik this post is Helpful </button>
             </form>
           </div>
 
@@ -108,21 +88,21 @@
 
           </div>
           <div class="comment-container-text" <span class="border border-secondary"></span>
-              <textarea class="commentTextField" name="postContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
-              <div class="">
-                <div class=" con-btn comment-confirm">
-                  <button type="button" class="btn btn-primary btn-sm ">comment</button>
-                </div>
-
+            <textarea class="commentTextField" name="postContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
+            <div class="">
+              <div class=" con-btn comment-confirm">
+                <button type="button" class="btn btn-primary btn-sm ">comment</button>
               </div>
+
+            </div>
           </div>
         </div>
       </div>
-    <% }); %>
 
+
+    </div>
   </div>
-</div>
-
+  <br>
   <!-- Footer -->
   <footer class=" white-section" id="footer">
     <div class="fo-co">
@@ -131,7 +111,7 @@
       <i class="icon2 fab fa-instagram"></i>
       <i class="icon2 fas fa-envelope"></i>
     </div>
-      <p>© Copyright 2021 Hakuna Matata Bd</p>
+    <p>© Copyright 2021 Hakuna Matata Bd</p>
   </footer>
 </body>
 

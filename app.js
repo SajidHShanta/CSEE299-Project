@@ -103,6 +103,12 @@ const postSchema = new mongoose.Schema({
     type: String,
     default: "off",
   },
+  helpfull: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "User"
+    }
+  ],
 }, {timestamps: true});
 
 //create post mongoose model
@@ -112,9 +118,6 @@ app.get("/", (req,  res) => {
   if(req.isAuthenticated()){
     Post.find({})
       .populate("user", "name")
-      .select({
-        _id: 0,
-      })
       .sort({createdAt:-1})
       .limit(20)
       .exec((err, data) => {
@@ -154,9 +157,6 @@ app.get("/profile", (req, res)=> {
   if(req.isAuthenticated()){
     Post.find({user: req.user.id })
       .populate("user", "name")
-      .select({
-        _id: 0,
-      })
       .sort({createdAt:-1})
       .limit(20)
       .exec((err, data) => {
@@ -171,6 +171,22 @@ app.get("/profile", (req, res)=> {
     res.render("landing-page");
   }
 });
+
+//singale post page
+app.get("/posts/:id", (req, res) => {
+  const postID = req.params.id;
+  if(req.isAuthenticated()){
+    Post.findById(postID, (err, foundPost) => {
+      res.render("post", {
+        user: req.user,
+        post: foundPost
+      });
+  });
+  } else{
+    res.redirect("/");
+  }
+});
+
 app.post("/register", (req, res) => {
   //register() is a mathod of passport-local-mongoose package
   User.register({name: req.body.name, username: req.body.username},req.body.password, (err, user) =>{
@@ -208,6 +224,22 @@ app.post("/post", async (req, res) => {
       }
     });
     res.redirect(req.body.currentPath);
+  } catch(err) {
+    console.log(err);
+  }
+});
+
+app.post("/helpfull", async (req, res) => {
+  try {
+    //save posts to User model
+    await Post.updateOne({
+      _id: req.body.postID
+    }, {
+      $addToSet: {
+        helpfull: req.body.userID
+      }
+    });
+    res.redirect("/posts/"+req.body.postID);
   } catch(err) {
     console.log(err);
   }
