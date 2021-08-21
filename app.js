@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   googleId: String,
+  isVerified: {
+    type: String,
+    default: "no",
+  },
   posts: [
     {
       type: mongoose.Types.ObjectId,
@@ -146,6 +150,27 @@ app.get("/logout", (req, res) => {
   res.redirect('/');
 });
 
+app.get("/profile", (req, res)=> {
+  if(req.isAuthenticated()){
+    Post.find({user: req.user.id })
+      .populate("user", "name")
+      .select({
+        _id: 0,
+      })
+      .sort({createdAt:-1})
+      .limit(20)
+      .exec((err, data) => {
+        if(err){
+          console.log(err);
+        } else {
+          //console.log(data);
+          res.render("profile", {user: req.user, posts: data});
+        }
+      })
+  } else{
+    res.render("landing-page");
+  }
+});
 app.post("/register", (req, res) => {
   //register() is a mathod of passport-local-mongoose package
   User.register({name: req.body.name, username: req.body.username},req.body.password, (err, user) =>{
@@ -182,7 +207,7 @@ app.post("/post", async (req, res) => {
         posts: post._id
       }
     });
-    res.redirect("/");
+    res.redirect(req.body.currentPath);
   } catch(err) {
     console.log(err);
   }

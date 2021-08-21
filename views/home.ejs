@@ -28,7 +28,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid navbar-content">
-      <a class="navbar-brand" href="#">Hakuna Matata</a>
+      <a class="navbar-brand" href="/">Hakuna Matata</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,20 +43,13 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Dashboard</a>
           </li>
-
         </ul>
         <form class="d-flex">
-
           <input class="search-in form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button type="button" class="btn btn-outline-secondary">Search</button>
-
-
         </form>
-        <!-- profile -->
-        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">UserName</a> -->
-         <a class="wh-a nav-link active" aria-current="page" href="#"><%= user.name %></a>
+        <a class="wh-a nav-link active" aria-current="page" href="/profile"><%= user.name %></a>
         <a class="wh-a" href="/logout" role="button"><i class="fas fa-sign-out-alt"></i></a>
-
       </div>
     </div>
   </nav>
@@ -74,6 +67,7 @@
               <input type="checkbox" name="isAnonymus">
               <label for="isAnonymus">Anonymus</label>
               <input type="hidden" name="userID" value="<%= user.id %>">
+              <input type="hidden" name="currentPath" value="/">
               <button type="submit" class="btn btn-outline-primary btn-sm">Post</button>
             </div>
           </div>
@@ -100,7 +94,6 @@
             <p class="text-break mb-auto postText"><%= post.postContent %></p>
             <button type="button" title="Love it" class="hbtn btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Helpful </button>
           </div>
-          <!-- <div class="col-auto d-none d-lg-block"> -->
 
           <div class="col-md-12 comment-container" <span class="border border-secondary"></span>
             <hr class="hr-post-cmnt">

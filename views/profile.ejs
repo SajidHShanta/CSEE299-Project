@@ -26,7 +26,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid navbar-content">
-      <a class="navbar-brand" href="#">Hakuna Matata</a>
+      <a class="navbar-brand" href="/">Hakuna Matata</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -50,9 +50,7 @@
 
 
         </form>
-        <!-- profile -->
-        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">UserName</a> -->
-        <a class="wh-a nav-link active" aria-current="page" href="#">UserName</a>
+        <a class="wh-a nav-link active" aria-current="page" href="/profile"><%= user.name %></a>
         <a class="wh-a" href="/logout" role="button"><i class="fas fa-sign-out-alt"></i></a>
 
       </div>
@@ -61,13 +59,17 @@
   <div class="container">
     <div class="rounded first-container">
       <div class="">
-        <h3><strong>username's Profile</strong></h3>
+        <h1><strong><%= user.name %>'s Profile</strong></h1>
         <br>
-        <br>
-        <h5>email: username@gmail.com</h5>
+        <h5>email: <%= user.username %></h5>
         <div>
-          <h5>Verification status: No</h5>
-          <button type="button" class="btn btn-primary btn-sm ">Verify your account</button>
+          <% if(user.isVerified === "yes"){ %>
+            <h5>You are Verified</h5>
+            <button type="button" class="btn btn-primary btn-sm ">Rating button</button>
+          <% } else{ %>
+            <h5>Verification status: No</h5>
+            <a  class="btn btn-primary btn-sm " href="/verify">Verify Yourself</a>
+          <% } %>
         </div>
       </div>
       <br>
@@ -75,11 +77,12 @@
       <form action="/post" method="POST">
         <div class="form-group">
           <textarea class="postTextField" name="postContent" rows="5" cols="80" placeholder="What's on your mind.."></textarea>
-          <div class="post-confirm">
+          <div class="post-confirm con-btn">
             <input type="checkbox" name="isAnonymus">
             <label for="isAnonymus">Anonymus</label>
             <input type="hidden" name="userID" value="<%= user.id %>">
-            <button type="button" class="btn btn-outline-primary btn-sm">Post</button>
+            <input type="hidden" name="currentPath" value="/profile">
+            <button type="submit" class="btn btn-outline-primary btn-sm">Post</button>
           </div>
         </div>
       </form>
@@ -88,43 +91,59 @@
     <div class="prof-post">
       <h4 class="post-text">Your posts</h4>
     </div>
+
     <div class="row mb-2 second-container">
-      <div class="col-md-12">
-        <div class="row post-container">
+        <% posts.forEach(function(post){ %>
+          <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm post-container" style="margin-bottom: 5px">
 
-          <!-- <div class="col p-4 d-flex flex-column position-static"> -->
-          <div class="post-content-container">
-            <div class="mb-1 text-muted">
-              <h3>user.name</h3>July 14
-            </div>
-            <p class="text-break mb-auto postText">This is a wider card with supporting text below as a natural lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to
-              additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural
-              lead-in to additional contentThis is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional content.</p>
-            <button type="button" title="Love it" class="hbtn btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Helpful </button>
-          </div>
-          <!-- <div class="col-auto d-none d-lg-block"> -->
-
-          <div class="col-md-12 comment-container" <span class="border border-secondary"></span>
-            <hr class="hr-post-cmnt">
-            <h5>commenterName <span class="fa fa-star checked"></span>
-            </h5>
-
-            <p>This is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional content.</p>
-
-          </div>
-          <div class="comment-container-text" <span class="border border-secondary"></span>
-            <textarea class="commentTextField" name="postContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
-            <div class="">
-              <div class=" con-btn comment-confirm">
-                <button type="button" class="btn btn-primary btn-sm ">comment</button>
+              <!-- <div class="col p-4 d-flex flex-column position-static"> -->
+              <div class="post-content-container">
+                <div class="mb-1 text-muted">
+                    <h3><%= post.user.name %></h3><%= post.createdAt %>
+                </div>
+                <p class="text-break mb-auto postText"><%= post.postContent %></p>
+                <button type="button" title="Love it" class="hbtn btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Helpful </button>
               </div>
+              <!-- <div class="col-auto d-none d-lg-block"> -->
 
+              <div class="col-md-12 comment-container" <span class="border border-secondary"></span>
+                <hr class="hr-post-cmnt">
+                <h5>commenterName <span class="fa fa-star checked"></span>
+                </h5>
+
+                <p>This is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional content.</p>
+
+              </div>
+              <div class="comment-container-text" <span class="border border-secondary"></span>
+                  <textarea class="commentTextField" name="postContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
+                  <div class="">
+                    <div class=" con-btn comment-confirm">
+                      <button type="button" class="btn btn-primary btn-sm ">comment</button>
+                    </div>
+
+                  </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        <% }); %>
 
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer class=" white-section" id="footer">
+      <div class="fo-co">
+        <i class="icon2 fab fa-twitter"></i>
+        <i class="icon2 fab fa-facebook-f"></i>
+        <i class="icon2 fab fa-instagram"></i>
+        <i class="icon2 fas fa-envelope"></i>
+      </div>
+        <p>© Copyright 2021 Hakuna Matata Bd</p>
+    </footer>
+    <script src="javascript/helpfulReact.js" charset="utf-8">
+    </script>
+
 </body>
 
 </html>
