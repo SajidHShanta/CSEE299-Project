@@ -1,0 +1,37 @@
+body {
+    background-color: #f6f9fe;
+}
+
+label.radio {
+    cursor: pointer
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 4px 0px;
+    border: 1px solid grey;
+    display: inline-block;
+    color: #222831;
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 7px;
+    text-transform: uppercase
+}
+
+label.radio input:checked+span {
+    border-color: green;
+    background-color: green;
+    color: #fff
+}
+
+.ans {
+    margin-left: 36px
+}
