@@ -114,6 +114,20 @@ const postSchema = new mongoose.Schema({
 //create post mongoose model
 const Post = mongoose.model('Post', postSchema);
 
+//quiz Schema
+const quizSchema = new mongoose.Schema({
+  question: String,
+  options: [
+    {
+      type: String,
+    }
+  ],
+  answerIndex: Number,
+});
+
+//create post mongoose model
+const Quiz = mongoose.model('Quiz', quizSchema);
+
 app.get("/", (req,  res) => {
   if(req.isAuthenticated()){
     Post.find({})
@@ -188,6 +202,20 @@ app.get("/posts/:id", (req, res) => {
   }
 });
 
+//Quiz Handeler
+app.get("/verify", (req, res) => {
+  res.render("start-quiz");
+});
+app.get("/quiz", (req, res) => {
+  if(req.isAuthenticated()){
+    Quiz.find({}, (err, foundItems) => {
+      res.render("quiz", {user: req.user, quizes: foundItems});
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
 app.post("/register", (req, res) => {
   //register() is a mathod of passport-local-mongoose package
   User.register({name: req.body.name, username: req.body.username},req.body.password, (err, user) =>{
@@ -244,6 +272,43 @@ app.post("/helpfull", async (req, res) => {
   } catch(err) {
     console.log(err);
   }
+});
+
+app.post("/quiz", async (req, res) => {
+  let score = 0, feild = "";
+
+  for (let i = 1; i < req.body.totalQ; i++) {
+    feild = "q"+i;
+    //console.log("  Q"+i+" :"+ req.body[feild]);
+    score+=Number(req.body[feild]);
+  }
+
+  let resultText = "";
+  if (score>=7) {
+    await User.updateOne({
+      _id: req.body.userID
+    }, {
+      isVerified: "yes"
+    });
+    resultText="Congratulations message bla bla";
+  } else {
+    resultText = "Sorry, Your schore is bellow 70%. Try again bla bla";
+  }
+  //console.log(score);
+  res.render("quiz-result", {resultText: resultText});
+});
+
+//temoporary insert quiz : this per will delete latter
+app.get("/insertquiz", (req, res) => {
+  res.render("insert-quiz");
+});
+app.post("/insertquiz", (req, res) => {
+  const newQuiz = new Quiz({
+    question: req.body.Q,
+    options: [req.body.op1, req.body.op2, req.body.op3, req.body.op4],
+    answerIndex: req.body.cA,
+  });
+  newQuiz.save();
 });
 
 app.listen(process.env.PORT, () => {

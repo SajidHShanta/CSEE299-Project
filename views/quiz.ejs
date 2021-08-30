@@ -18,40 +18,48 @@
     <div class="justify-content-center row ">
       <div class="col-md-10 ">
         <div class="border ">
+
+        <form action="/quiz" method="POST">
+
           <div class="question bg-white p-3 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center mcq">
               <h4>Quiz for verifying your profile</h4>
             </div>
           </div>
+          
           <!--question part -->
-          <div class="question bg-white p-3 border-bottom">
-            <div class="d-flex flex-row align-items-center question-title">
-              <h3 class="text-success">Q.</h3>
-              <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
+          <% let i = 1; %>
+          <% quizes.forEach(function(quiz){ %>
+            <div class="question bg-white p-3 border-bottom">
+              <div class="d-flex flex-row align-items-center question-title">
+                <h3 class="text-success">Q.</h3>
+                <h5 class="mt-1 ml-2"><%= quiz.question %></h5>
+              </div>
+              <% for (var j = 0; j < quiz.options.length; j++) { %>
+                <div class="ans ml-2">
+                <% if (quiz.options[j] === quiz.options[quiz.answerIndex]) { %>
+                  <label class="radio"> <input type="radio" name="q<%= i %>" value=1> <span><%= quiz.options[j] %></span></label>
+                <% } else { %>
+                  <label class="radio"> <input type="radio" name="q<%= i %>" value=0> <span><%= quiz.options[j] %></span></label>
+                <% } %>
+                </div>
+              <% } %>
+
             </div>
-            <div class="ans ml-2">
-              <label class="radio"> <input type="radio" name="q1" value="brazil"> <span>Brazil</span>
-              </label>
-            </div>
-            <div class="ans ml-2">
-              <label class="radio"> <input type="radio" name="q1" value="Germany"> <span>Germany</span>
-              </label>
-            </div>
-            <div class="ans ml-2">
-              <label class="radio"> <input type="radio" name="q1" value="Indonesia"> <span>Indonesia</span>
-              </label>
-            </div>
-            <div class="ans ml-2">
-              <label class="radio"> <input type="radio" name="q1" value="Russia"> <span>Russia</span>
-              </label>
-            </div>
-          </div>
+            <% i++; %>
+          <% }) %>
+
           <!-- submit part -->
           <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button type="button" class="btn btn-outline-primary">Submit</button>
+              <input type="hidden" name="totalQ" value="<%= i %>">
+              <input type="hidden" name="userID" value="<%= user._id %>">
+              <button type="submit" class="btn btn-outline-primary">Submit</button>
             </div>
-            </div>
+          </div>
+
+          </form>
+
         </div>
       </div>
     </div>
