@@ -55,6 +55,12 @@ const userSchema = new mongoose.Schema({
       ref: "Post"
     }
   ],
+  comments: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Comment"
+    }
+  ],
 });
 
 //for hash and salt password and save user in mongodb database
@@ -93,6 +99,7 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+//post schema
 const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
@@ -109,10 +116,36 @@ const postSchema = new mongoose.Schema({
       ref: "User"
     }
   ],
+  comments: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Comment"
+    }
+  ],
 }, {timestamps: true});
 
 //create post mongoose model
 const Post = mongoose.model('Post', postSchema);
+
+//post schema
+const commentSchema = new mongoose.Schema({
+  commenter: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  },
+  post: {
+    type: mongoose.Types.ObjectId,
+    ref: "Post"
+  },
+  commentContent: String,
+  rating: {
+    type: Number,
+    default: 0,
+  },
+});
+
+//create post mongoose model
+const Comment = mongoose.model('Comment', commentSchema);
 
 //quiz Schema
 const quizSchema = new mongoose.Schema({
@@ -132,13 +165,20 @@ app.get("/", (req,  res) => {
   if(req.isAuthenticated()){
     Post.find({})
       .populate("user", "name")
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'commenter',
+          model: 'User'
+        }
+      })
       .sort({createdAt:-1})
       .limit(20)
       .exec((err, data) => {
         if(err){
           console.log(err);
         } else {
-          //console.log(data);
+          // console.log(data);
           res.render("home", {user: req.user, posts: data});
         }
       })
@@ -197,6 +237,13 @@ app.get("/posts/:id", (req, res) => {
       });
   })
   .populate("user", "name")
+  .populate({
+    path: 'comments',
+    populate: {
+      path: 'commenter',
+      model: 'User'
+    }
+  })
   } else{
     res.redirect("/");
   }
@@ -266,6 +313,39 @@ app.post("/helpfull", async (req, res) => {
     }, {
       $addToSet: {
         helpfull: req.body.userID
+      }
+    });
+    res.redirect("/posts/"+req.body.postID);
+  } catch(err) {
+    console.log(err);
+  }
+});
+
+app.post("/comment", async (req, res) => {
+  const newComment = new Comment({
+    commenter: req.body.userID,
+    post: req.body.postID,
+    commentContent: req.body.commentContent,
+  });
+  try {
+    //save comment to Comment model
+    const comment = await newComment.save();
+    console.log(comment._id);
+
+    //save comments to User model
+    await User.updateOne({
+      _id: req.body.userID
+    }, {
+      $push: {
+        comments: comment._id
+      }
+    });
+    //save comments to Post model
+    await Post.updateOne({
+      _id: req.body.postID
+    }, {
+      $push: {
+        comments: comment._id
       }
     });
     res.redirect("/posts/"+req.body.postID);
