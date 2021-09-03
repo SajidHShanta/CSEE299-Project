@@ -127,7 +127,7 @@ const postSchema = new mongoose.Schema({
 //create post mongoose model
 const Post = mongoose.model('Post', postSchema);
 
-//post schema
+//comment schema
 const commentSchema = new mongoose.Schema({
   commenter: {
     type: mongoose.Types.ObjectId,
@@ -144,7 +144,7 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
-//create post mongoose model
+//create comment mongoose model
 const Comment = mongoose.model('Comment', commentSchema);
 
 //quiz Schema
@@ -158,7 +158,7 @@ const quizSchema = new mongoose.Schema({
   answerIndex: Number,
 });
 
-//create post mongoose model
+//create quiz mongoose model
 const Quiz = mongoose.model('Quiz', quizSchema);
 
 app.get("/", (req,  res) => {
@@ -211,6 +211,13 @@ app.get("/profile", (req, res)=> {
   if(req.isAuthenticated()){
     Post.find({user: req.user.id })
       .populate("user", "name")
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'commenter',
+          model: 'User'
+        }
+      })
       .sort({createdAt:-1})
       .limit(20)
       .exec((err, data) => {
@@ -350,6 +357,20 @@ app.post("/comment", async (req, res) => {
     });
     res.redirect("/posts/"+req.body.postID);
   } catch(err) {
+    console.log(err);
+  }
+});
+
+app.post("/rating", async (req, res) => {
+  try {
+    //update the comment rating
+    await Comment.updateOne({
+      _id: req.body.commentID
+    }, {
+      rating: req.body.rating
+    });
+    res.redirect("/posts/"+req.body.postID);
+  } catch (err) {
     console.log(err);
   }
 });

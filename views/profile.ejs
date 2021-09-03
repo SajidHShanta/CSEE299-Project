@@ -109,25 +109,43 @@
                   <button type="submit" class="btn btn-danger btn-sm"><span>&#x2764;</span><strong><%= post.helpfull.length %></strong>  People thik this post is Helpful </button>
                 </form>
               </div>
-              <!-- <div class="col-auto d-none d-lg-block"> -->
 
+              <hr class="hr-post-cmnt">
+              <% post.comments.forEach(function(comment){ %>
+              <form action="/rating" method="POST">
               <div class="col-md-12 comment-container" <span class="border border-secondary"></span>
-                <hr class="hr-post-cmnt">
-                <h5>commenterName <span class="fa fa-star checked"></span>
+                <h5><%= comment.commenter.name %>
+                  <select name="rating" id="rating" class="btn btn-outline-danger btn-sm">
+                    <option value="volvo"><%= comment.rating %></option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                  </select>
+                    <span class="fa fa-star checked"></span>
+                    <input type="hidden" name="postID" value="<%= post._id %>">
+                    <input type="hidden" name="commentID" value="<%= comment.id %>">
+                    <button type="submit" class="btn btn-danger btn-sm">Submit Rating</button>
                 </h5>
-
-                <p>This is a wider card with supporting text b wider card with supporting text below as a natural lead-in to additional content.</p>
-
+                <p><%= comment.commentContent %></p>
               </div>
-              <div class="comment-container-text" <span class="border border-secondary"></span>
-                  <textarea class="commentTextField" name="postContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
-                  <div class="">
-                    <div class=" con-btn comment-confirm">
-                      <button type="button" class="btn btn-primary btn-sm ">comment</button>
+              </form>
+              <% }); %>
+
+              <form action="/comment" method="POST">
+                <div class="comment-container-text" <span class="border border-secondary"></span>
+                    <textarea class="commentTextField" name="commentContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
+                    <div class="">
+                      <div class=" con-btn comment-confirm">
+                        <input type="hidden" name="postID" value="<%= post.id %>">
+                        <input type="hidden" name="userID" value="<%= user.id %>">
+                        <button type="submit" class="btn btn-primary btn-sm ">comment</button>
+                      </div>
                     </div>
+                </div>
+              </form>
 
-                  </div>
-              </div>
             </div>
           </div>
         <% }); %>
