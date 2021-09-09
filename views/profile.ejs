@@ -64,8 +64,7 @@
         <h5>email: <%= user.username %></h5>
         <div>
           <% if(user.isVerified === "yes"){ %>
-            <h5>You are Verified</h5>
-            <button type="button" class="btn btn-primary btn-sm ">Rating button</button>
+            <h6 style="color:green">You are Verified ✅</h6>
           <% } else{ %>
             <h5>Verification status: No</h5>
             <a  class="btn btn-primary btn-sm " href="/verify">Verify Yourself</a>
@@ -133,7 +132,7 @@
               </form>
               <% }); %>
 
-              <form action="/comment" method="POST">
+              <!-- <form action="/comment" method="POST">
                 <div class="comment-container-text" <span class="border border-secondary"></span>
                     <textarea class="commentTextField" name="commentContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
                     <div class="">
@@ -144,7 +143,7 @@
                       </div>
                     </div>
                 </div>
-              </form>
+              </form> -->
 
             </div>
           </div>

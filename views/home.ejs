@@ -107,18 +107,26 @@
           </div>
           <% }); %>
 
-          <form action="/comment" method="POST">
-            <div class="comment-container-text" <span class="border border-secondary"></span>
-                <textarea class="commentTextField" name="commentContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
-                <div class="">
-                  <div class=" con-btn comment-confirm">
-                    <input type="hidden" name="postID" value="<%= post.id %>">
-                    <input type="hidden" name="userID" value="<%= user.id %>">
-                    <button type="submit" class="btn btn-primary btn-sm ">comment</button>
+          <% if(user.isVerified === "yes"){ %>
+            <form action="/comment" method="POST">
+              <div class="comment-container-text" <span class="border border-secondary"></span>
+                  <textarea class="commentTextField" name="commentContent" rows="2" cols="2" placeholder="What's on your mind.."></textarea>
+                  <div class="">
+                    <div class=" con-btn comment-confirm">
+                      <input type="hidden" name="postID" value="<%= post.id %>">
+                      <input type="hidden" name="userID" value="<%= user.id %>">
+                      <button type="submit" class="btn btn-primary btn-sm ">comment</button>
+                    </div>
                   </div>
-                </div>
-            </div>
-          </form>
+              </div>
+            </form>
+          <% } else{ %>
+            <a  class="btn btn-primary btn-sm " href="/verify">Verify Yourself to Comment</a>
+             <p></p>
+            <br>
+          <% } %>
+
+
 
         </div>
       </div>
