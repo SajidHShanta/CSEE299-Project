@@ -66,7 +66,7 @@
           <% if(user.isVerified === "yes"){ %>
             <h6 style="color:green">You are Verified ✅</h6>
           <% } else{ %>
-            <h5>Verification status: No</h5>
+            <h6 style="color:red">Verification status: No</h6>
             <a  class="btn btn-primary btn-sm " href="/verify">Verify Yourself</a>
           <% } %>
         </div>
@@ -75,7 +75,9 @@
       <h5>Write a new post</h5>
       <form action="/post" method="POST">
         <div class="form-group">
-          <textarea class="postTextField" name="postContent" rows="5" cols="80" placeholder="What's on your mind.."></textarea>
+          <textarea id="textarea" class="postTextField" name="postContent" rows="5" cols="80" placeholder="What's on your mind.."></textarea>
+          <p id="start" class="btn btn-primary btn-block">Start Recording 🟢</p>
+          <span id="instructions" style="color:red"></span>
           <div class="post-confirm con-btn">
             <input type="checkbox" name="isAnonymus">
             <label for="isAnonymus">Anonymus</label>
@@ -164,5 +166,6 @@
     </footer>
 
 </body>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="javascript/speech-to-text.js"></script>
 </html>
