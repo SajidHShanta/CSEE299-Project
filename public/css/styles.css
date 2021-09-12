@@ -271,3 +271,22 @@ label{
  .f-text {
    color: #34495E;
  }
+
+ /* Course */
+
+.course-container {
+   background-color: white;
+   margin:  5px auto;
+   padding: 10px;
+   text-align: center;
+ }
+
+ .modal-content {
+   background: transparent;
+   border: none;
+   width: 80%;
+ }
+
+ .course-video {
+   margin: auto;
+ }

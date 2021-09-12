@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hakuna Matata</title>
+  <base href="/">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;900&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/9edd8b5e53.js" crossorigin="anonymous"></script>
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid navbar-content">
+      <a class="navbar-brand" href="/">Hakuna Matata</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="search-in form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button type="button" class="btn btn-outline-secondary">Search</button>
+        </form>
+        <a class="wh-a nav-link active" aria-current="page" href="/profile"><%= user.name %></a>
+        <a class="wh-a" href="/logout" role="button"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <br>
+    <h1 style="text-align: center">Mental Health Course (English)</h1>
+    <div class="row border rounded shadow-sm" style="padding: 5px">
+      <div class="col-md-5 course-container border rounded shadow-sm">
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video1"><i class="bi bi-play-circle"></i> Depression and major depressive disorder</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Depression and major depressive disorder</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/tOVJgYHj6kc?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video2"><i class="bi bi-play-circle"></i> Depression, the secret</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video2">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Depression, the secret</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/-eBUcBfkVCo?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video3"><i class="bi bi-play-circle"></i> Grow new brain cells</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video3">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Grow new brain cells</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/B_tjKYvEziI?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video4"><i class="bi bi-play-circle"></i> The voices in your head</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video4">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">The voices in your head</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/syjEN3peCJw?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video5"><i class="bi bi-play-circle"></i> Why we need to talk about depression</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video5">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Why we need to talk about depression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/-Qe8cR4Jl10?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video6"><i class="bi bi-play-circle"></i> Why do we sleep</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video6">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Why do we sleep</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/LWULB9Aoopc?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video7"><i class="bi bi-play-circle"></i> The surprising science of happiness</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video7">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">The surprising science of happiness</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/4q1dgn_C0AU?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video8"><i class="bi bi-play-circle"></i> Your words may predict your future mental health</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video8">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Your words may predict your future mental health</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/uTL9tm7S1Io?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video9"><i class="bi bi-play-circle"></i> How to stay calm when you know you'll be stressed</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video9">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">How to stay calm when you know you'll be stressed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/8jPQjjsBbIc?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+        <h5><a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Video10"><i class="bi bi-play-circle"></i> A tale of mental illness | Elyn Saks</a></h5>
+        <!-- Modal -->
+        <div class="modal fade" id="Video10">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">A tale of mental illness | Elyn Saks</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe class="course-video" width="100%" src="https://www.youtube.com/embed/f6CILJA110Y?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+                </video> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Model end -->
+
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Footer -->
+  <footer class=" white-section" id="footer">
+    <div class="fo-co">
+      <i class="icon2 fab fa-twitter"></i>
+      <i class="icon2 fab fa-facebook-f"></i>
+      <i class="icon2 fab fa-instagram"></i>
+      <i class="icon2 fas fa-envelope"></i>
+    </div>
+    <p>© Copyright 2021 Hakuna Matata Bd</p>
+  </footer>
+</body>
+
+</html>

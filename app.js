@@ -256,7 +256,6 @@ app.get("/posts/:id", (req, res) => {
   }
 });
 
-//Quiz Handeler
 app.get("/verify", (req, res) => {
   res.render("start-quiz");
 });
@@ -265,6 +264,22 @@ app.get("/quiz", (req, res) => {
     Quiz.find({}, (err, foundItems) => {
       res.render("quiz", {user: req.user, quizes: foundItems});
     });
+  } else {
+    res.redirect("/");
+  }
+});
+
+app.get("/course", (req, res) => {
+  if(req.isAuthenticated()){
+    res.render("course", {user: req.user});
+  } else {
+    res.redirect("/");
+  }
+});
+
+app.get("/course/:courseNaem", (req, res) => {
+  if(req.isAuthenticated()){
+    res.render(req.params.courseNaem, {user: req.user});
   } else {
     res.redirect("/");
   }
