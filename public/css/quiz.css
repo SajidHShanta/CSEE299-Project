@@ -35,3 +35,12 @@ label.radio input:checked+span {
 .ans {
     margin-left: 36px
 }
+
+.mid{
+    margin: auto;
+    margin-top: 100px;
+    width: 50%;
+    border-width: 2px 2px 2px 2px;
+    padding: 10px;
+    max-width: 30rem;
+}

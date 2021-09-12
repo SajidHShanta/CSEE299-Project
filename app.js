@@ -285,6 +285,14 @@ app.get("/course/:courseNaem", (req, res) => {
   }
 });
 
+app.get("/testseverity", (req, res) => {
+  if(req.isAuthenticated()){
+    res.render("depression-severity-test", {user: req.user});
+  } else {
+    res.redirect("/");
+  }
+});
+
 app.post("/register", (req, res) => {
   //register() is a mathod of passport-local-mongoose package
   User.register({name: req.body.name, username: req.body.username},req.body.password, (err, user) =>{
@@ -406,9 +414,9 @@ app.post("/quiz", async (req, res) => {
     }, {
       isVerified: "yes"
     });
-    resultText="Congratulations message bla bla";
+    resultText="Congratulations! Your account is verified now. Nosw, you can comment on any posts.";
   } else {
-    resultText = "Sorry, Your schore is bellow 70%. Try again bla bla";
+    resultText = "Sorry, Your score is below 70%. Try again later. Till then be prepared by watching the courses.";
   }
   //console.log(score);
   res.render("quiz-result", {resultText: resultText});
