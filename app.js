@@ -285,7 +285,7 @@ app.get("/course/:courseNaem", (req, res) => {
   }
 });
 
-app.get("/testseverity", (req, res) => {
+app.get("/test-severity", (req, res) => {
   if(req.isAuthenticated()){
     res.render("depression-severity-test", {user: req.user});
   } else {
